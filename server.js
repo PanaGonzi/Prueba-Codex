@@ -39,6 +39,7 @@ app.post('/calculate', (req, res) => {
       return res.status(400).json({ error: 'Operación no soportada' });
   }
   const expr = `${a} ${operation} ${b}`;
+  // Guardamos la operación en la base de datos para mantener un historial
   db.run('INSERT INTO history (expression, result) VALUES (?, ?)', [expr, result]);
   res.json({ result });
 });
