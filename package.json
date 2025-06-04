@@ -1,0 +1,18 @@
+{
+  "name": "prueba-codex",
+  "version": "1.0.0",
+  "description": "Esta es una prueba de repositorio para usar con Codex. Incluye un ejemplo sencillo de aplicación web que cuenta el número de veces que se pulsa un botón.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}
