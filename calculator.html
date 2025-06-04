@@ -25,7 +25,6 @@
             margin: 3px;
             font-size: 1.2em;
         }
-        #history { margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -51,15 +50,7 @@
             <button data-op="+">+</button>
         </div>
     </div>
-    <div id="history"></div>
-
     <script>
-        async function fetchHistory() {
-            const res = await fetch('/history');
-            const data = await res.json();
-            const histEl = document.getElementById('history');
-            histEl.innerHTML = '<h3>Historial</h3>' + data.map(h => `<div>${h.expression} = ${h.result}</div>`).join('');
-        }
 
         const display = document.getElementById('display');
         let current = '';
@@ -95,7 +86,6 @@
             current = '';
             num1 = null;
             operation = null;
-            fetchHistory();
         });
 
         document.getElementById('clearBtn').addEventListener('click', () => {
@@ -105,7 +95,6 @@
             display.value = '';
         });
 
-        fetchHistory();
     </script>
 </body>
 </html>
