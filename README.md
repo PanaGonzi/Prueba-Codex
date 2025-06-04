@@ -8,16 +8,7 @@ Abre el archivo `touch_counter.html` en un navegador web. Cada vez que presiones
 
 ## Calculadora
 
-Se añadió una aplicación de calculadora accesible en `calculator.html`. La interfaz simula una calculadora real con botones numéricos y un estilo en tonos rosa. Para utilizar la calculadora debes ejecutar el servidor incluido.
-
-### Ejecutar servidor
-
-```bash
-npm install
-npm start
-```
-
-El servidor se inicia en `http://localhost:3000` y sirve la página de la calculadora. Al realizar una operación verás el resultado en pantalla.
+Se añadió una aplicación de calculadora accesible en `calculator.html`. La interfaz simula una calculadora real con botones numéricos y un estilo en tonos rosa. Solo necesitas abrir el archivo en el navegador y podrás realizar operaciones básicas de forma local.
 
 # TO-DO
 - [x] Crear UI de la calculadora

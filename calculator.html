@@ -53,46 +53,41 @@
     <script>
 
         const display = document.getElementById('display');
-        let current = '';
-        let num1 = null;
-        let operation = null;
+        let expression = '';
+
+        function updateDisplay() {
+            display.value = expression;
+        }
 
         document.querySelectorAll('[data-num]').forEach(btn => {
             btn.addEventListener('click', () => {
-                current += btn.dataset.num;
-                display.value = current;
+                expression += btn.dataset.num;
+                updateDisplay();
             });
         });
 
         document.querySelectorAll('[data-op]').forEach(btn => {
             btn.addEventListener('click', () => {
-                if (current === '') return;
-                num1 = current;
-                operation = btn.dataset.op;
-                current = '';
-                display.value = '';
+                if (expression === '' || /[+\-*/]$/.test(expression)) return;
+                expression += btn.dataset.op;
+                updateDisplay();
             });
         });
 
-        document.getElementById('equalsBtn').addEventListener('click', async () => {
-            if (num1 === null || operation === null || current === '') return;
-            const res = await fetch('/calculate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ num1, num2: current, operation })
-            });
-            const data = await res.json();
-            display.value = data.result;
-            current = '';
-            num1 = null;
-            operation = null;
+        document.getElementById('equalsBtn').addEventListener('click', () => {
+            if (expression === '' || /[+\-*/]$/.test(expression)) return;
+            try {
+                expression = eval(expression).toString();
+                updateDisplay();
+            } catch (e) {
+                expression = '';
+                display.value = 'Error';
+            }
         });
 
         document.getElementById('clearBtn').addEventListener('click', () => {
-            current = '';
-            num1 = null;
-            operation = null;
-            display.value = '';
+            expression = '';
+            updateDisplay();
         });
 
     </script>
