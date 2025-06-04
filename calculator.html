@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .calculator {
+            display: inline-block;
+            background: pink;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .display {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            text-align: right;
+        }
+        .buttons button {
+            width: 50px;
+            height: 50px;
+            margin: 3px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora</h1>
+    <div class="calculator">
+        <input class="display" id="display" type="text" readonly>
+        <div class="buttons">
+            <button data-num="7">7</button>
+            <button data-num="8">8</button>
+            <button data-num="9">9</button>
+            <button data-op="/">/</button><br>
+            <button data-num="4">4</button>
+            <button data-num="5">5</button>
+            <button data-num="6">6</button>
+            <button data-op="*">*</button><br>
+            <button data-num="1">1</button>
+            <button data-num="2">2</button>
+            <button data-num="3">3</button>
+            <button data-op="-">-</button><br>
+            <button data-num="0">0</button>
+            <button id="clearBtn">C</button>
+            <button id="equalsBtn">=</button>
+            <button data-op="+">+</button>
+        </div>
+    </div>
+    <script>
+
+        const display = document.getElementById('display');
+        let expression = '';
+
+        function updateDisplay() {
+            display.value = expression;
+        }
+
+        document.querySelectorAll('[data-num]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                expression += btn.dataset.num;
+                updateDisplay();
+            });
+        });
+
+        document.querySelectorAll('[data-op]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (expression === '' || /[+\-*/]$/.test(expression)) return;
+                expression += btn.dataset.op;
+                updateDisplay();
+            });
+        });
+
+        document.getElementById('equalsBtn').addEventListener('click', () => {
+            if (expression === '' || /[+\-*/]$/.test(expression)) return;
+            try {
+                expression = eval(expression).toString();
+                updateDisplay();
+            } catch (e) {
+                expression = '';
+                display.value = 'Error';
+            }
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            expression = '';
+            updateDisplay();
+        });
+
+    </script>
+</body>
+</html>
